@@ -57,6 +57,7 @@ public class Server implements Runnable{
                     fac = scanner.nextLine();
                     System.out.println("Enter type 1 for standart 2 for special ");
                     type = scanner.nextInt();
+                    requests.add(new Request(name, mark, moneyFamily, fac, type));
                     loop = false;
                     continue p;
                 }
@@ -78,7 +79,8 @@ public class Server implements Runnable{
                     result =scanner.nextInt();
                     switch (result){
                         case 1:{
-                            //pop
+                            String w = pop();
+                            writer.print(w);
                             continue pp;
                         }case 2:{
                             tt=false;
@@ -92,5 +94,21 @@ public class Server implements Runnable{
             }
 
         }
+    }
+
+
+    private String pop(){
+        Request request = requests.poll();
+        StringBuilder b= new StringBuilder();
+        b.append(request.getName());
+        b.append(".");
+        b.append(request.getMark());
+        b.append(".");
+        b.append(request.getMoneyFamily());
+        b.append(".");
+        b.append(request.getFac());
+        b.append(".");
+        b.append(request.getType());
+        return b.toString();
     }
 }

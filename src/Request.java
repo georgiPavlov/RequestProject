@@ -35,4 +35,24 @@ public class Request {
     public void setType(int type) {
         this.type = type;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getMark() {
+        return mark;
+    }
+
+    public double getMoneyFamily() {
+        return moneyFamily;
+    }
+
+    public String getFac() {
+        return fac;
+    }
+
+    public int getType() {
+        return type;
+    }
 }
