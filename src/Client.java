@@ -83,4 +83,12 @@ public class Client implements Runnable {
         }
         return yes.pop();
     }
+
+    public Request getNo(){
+        if(!pass){
+            //my exeption
+
+        }
+        return no.pop();
+    }
 }
