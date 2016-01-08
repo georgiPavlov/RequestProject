@@ -1,8 +1,8 @@
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * Created by georgipavlov on 08.01.16.
@@ -23,13 +23,13 @@ public class Client implements Runnable {
             e.printStackTrace();
         }
         if(yes == null && no == null){
-            yes = new ArrayList<>();
-            no = new ArrayList<>();
+            yes = new Stack<>();
+            no = new Stack<>();
         }
 
     }
 
-
+    boolean pass = false;
     @Override
     public void run() {
         System.out.println(scannerSoc.nextLine());
@@ -42,6 +42,7 @@ public class Client implements Runnable {
             writer.print(scanner.nextLine());
             if(r.contains("#")){
                 requestP(r);
+                pass= true;
             }
 
 
@@ -57,8 +58,8 @@ public class Client implements Runnable {
         }
     }
 
-    static ArrayList<Request> yes;
-    static ArrayList<Request> no;
+     private static Stack<Request> yes;
+    private static Stack<Request> no;
 
     public void requestP(String r){
         boolean add=true;
@@ -70,8 +71,15 @@ public class Client implements Runnable {
             yes.add(new Request(arr[0],Double.parseDouble(arr[1]),Double.parseDouble(arr[2]),
                     arr[3],Integer.parseInt(arr[4])));
         }else {
-            no.add(new Request(arr[0],Double.parseDouble(arr[1]),Double.parseDouble(arr[2]),
-                    arr[3],Integer.parseInt(arr[4])));
+            no.add(new Request(arr[0], Double.parseDouble(arr[1]), Double.parseDouble(arr[2]),
+                    arr[3], Integer.parseInt(arr[4])));
         }
+    }
+
+    public Request getYes(){
+        if(!pass){
+         //my exeption
+        }
+        return yes.pop();
     }
 }
