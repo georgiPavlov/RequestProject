@@ -40,9 +40,7 @@ public class Server implements Runnable{
         String fac;
         int type;
         p: while (loop) {
-            System.out.println("You are connected please make a choice");
-            System.out.println("1 Logg as student");
-            System.out.println("2 logg as admin");
+            writer.println("You are connected please make a choice \n 1 Log as student \n 2 log as admin");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1: {
@@ -50,20 +48,20 @@ public class Server implements Runnable{
                     System.out.println("Enter name");
                     name = scanner.nextLine();
                     System.out.println("Enter mark");
-                    mark = scanner.nextDouble();
+                    mark = Double.parseDouble(scanner.nextLine());
                     System.out.println("Enter money");
-                    moneyFamily = scanner.nextDouble();
+                    moneyFamily = Double.parseDouble(scanner.nextLine());
                     System.out.println("Enter face");
                     fac = scanner.nextLine();
                     System.out.println("Enter type 1 for standart 2 for special ");
-                    type = scanner.nextInt();
+                    type = Integer.parseInt(scanner.nextLine());
                     requests.add(new Request(name, mark, moneyFamily, fac, type));
                     loop = false;
                     continue p;
                 }
                 case 2: {
                     int pass;
-                    System.out.println("Please enter a pass");
+                    writer.println("Please enter a pass");
                     pass = scanner.nextInt();
                     if (PASS == pass) {
                         t = true;
@@ -74,8 +72,8 @@ public class Server implements Runnable{
                     int result = 0;
                     boolean tt=true;
                     pp: while (tt){
-                    System.out.println("Press 1 to download a request");
-                    System.out.println("Press 2 to exit");
+                    writer.println("Press 1 to download a request");
+                    writer.println("Press 2 to exit");
                     result =scanner.nextInt();
                     switch (result){
                         case 1:{
@@ -90,10 +88,21 @@ public class Server implements Runnable{
                     }
 
                 }
+                case 3:{
+                    break ;
+                }
 
             }
 
         }
+        scanner.close();
+        writer.close();
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
