@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -21,6 +22,11 @@ public class Client implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if(yes == null && no == null){
+            yes = new ArrayList<>();
+            no = new ArrayList<>();
+        }
+
     }
 
 
@@ -29,9 +35,16 @@ public class Client implements Runnable {
         System.out.println(scannerSoc.nextLine());
         int result = scanner.nextInt();
         writer.print(result);
+        String r;
         while (scannerSoc.hasNext()) {
-            System.out.println(scannerSoc.nextLine());
+            r= scannerSoc.nextLine();
+            System.out.println(r);
             writer.print(scanner.nextLine());
+            if(r.contains("#")){
+                requestP(r);
+            }
+
+
         }
 
         scannerSoc.close();
@@ -41,6 +54,24 @@ public class Client implements Runnable {
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    static ArrayList<Request> yes;
+    static ArrayList<Request> no;
+
+    public void requestP(String r){
+        boolean add=true;
+        String[] arr = r.split("[#]+");
+        for (int i = 0; i < arr.length; i++) {
+           //opeartion
+        }
+        if(add){
+            yes.add(new Request(arr[0],Double.parseDouble(arr[1]),Double.parseDouble(arr[2]),
+                    arr[3],Integer.parseInt(arr[4])));
+        }else {
+            no.add(new Request(arr[0],Double.parseDouble(arr[1]),Double.parseDouble(arr[2]),
+                    arr[3],Integer.parseInt(arr[4])));
         }
     }
 }

@@ -72,9 +72,8 @@ public class Server implements Runnable{
                     int result = 0;
                     boolean tt=true;
                     pp: while (tt){
-                    writer.println("Press 1 to download a request");
-                    writer.println("Press 2 to exit");
-                    result =scanner.nextInt();
+                    writer.println("Press 1 to download a request \n Press 2 to exit");
+                        result =Integer.parseInt(scanner.nextLine());
                     switch (result){
                         case 1:{
                             String w = pop();
@@ -110,13 +109,13 @@ public class Server implements Runnable{
         Request request = requests.poll();
         StringBuilder b= new StringBuilder();
         b.append(request.getName());
-        b.append(".");
+        b.append("#");
         b.append(request.getMark());
-        b.append(".");
+        b.append("#");
         b.append(request.getMoneyFamily());
-        b.append(".");
+        b.append("#");
         b.append(request.getFac());
-        b.append(".");
+        b.append("#");
         b.append(request.getType());
         return b.toString();
     }
